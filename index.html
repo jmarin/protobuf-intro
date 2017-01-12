@@ -145,6 +145,70 @@
 	<section>
 	  <img src="img/hmda_fields.png"></img>	
 	</section>
+
+	<section>
+          <h2>HMDA Model</h2>
+	  <pre><code>
+            case class LoanApplicationRegister(
+              id: Int,
+              respondentId: String,
+              agencyCode: Int,
+              loan: Loan,
+              preapprovals: Int,
+              actionTakenType: Int,
+              actionTakenDate: Int,
+              geography: Geography,
+              applicant: Applicant,
+              purchaserType: Int,
+              denial: Denial,
+              rateSpread: String,
+              hoepaStatus: Int,
+              lienStatus: Int
+            ) 
+	  </code></pre>
+	</section>
+
+	<section>
+	  <h2>Edit Checks</h2>	
+	  <p>
+	  This data needs to be parsed from the specified format. In addition to this, every record goes through a series of "edits" or validation checks for data integrity. There are currently 156 edits, around 30 operate on the whole file (need to check all the data, summarize, etc.). The rest (~120) operate on every line.
+	  </p>	  
+	</section>
+
+	<section>
+	  <h2>Rule Engine</h2>
+          <p>We wrote a custom Rule Engine that could execute these rules. We wanted it to have some unique properties:</p>
+	  <ul>
+	    <li>Should execute rules in real time</li>
+	    <li>Should be able to run in parallel, in a cluster</li>
+	    <li>Rules should be easy to write and maintain</li>
+	  </ul>	  
+	</section>
+
+	<section>
+	  <h2>HMDA Domain Specific Language</h2>
+	  <pre><code data-trim data-noescape>
+             (lar.loan.amount is numeric) and (lar.loan.amount is greaterThan(0))
+          </code></pre>
+
+	  <pre><code>
+            when(lar.loan.purpose is oneOf(2, 3)) {
+              lar.preapprovals is equalTo(3)
+            }
+	  </code></pre>
+
+	  <pre><code>
+          when(lar.rateSpread is numeric) {
+            when(
+             (lar.actionTakenType is equalTo(1)) and
+             (lar.lienStatus is equalTo(1)) and
+             (lar.rateSpread.toDouble is greaterThan(rateSpread))
+            ) {
+              lar.hoepaStatus is equalTo(1)
+            }
+          }
+	  </code></pre>
+	</section>
                        
       </div>
 

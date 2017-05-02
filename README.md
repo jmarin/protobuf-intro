@@ -35,3 +35,11 @@ From the `java/protobuf` directory run:
 `mvn clean install`
 
 `mvn exec:java`
+
+3. Generate JavaScript code
+
+From the javascript subdirectory run:
+
+`npm install`
+
+`node index.js`

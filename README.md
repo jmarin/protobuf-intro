@@ -2,6 +2,7 @@
 
 ## A light introduction to Protocol Buffers
 
-### Messages
+1. Generate Python code
 
+`protoc -I=protobuf --python_out=python protobuf/addressbook.proto`
 

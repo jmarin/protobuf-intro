@@ -1,7 +1,7 @@
 package main
 
 import (
-	//"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/proto"
 	"github.com/jmarin/protobuf-intro"
 	"log"
 )
@@ -36,4 +36,11 @@ func main() {
 	}
 
 	log.Print(addressBook)
+
+	data, err := proto.Marshal(addressBook)
+	if err != nil {
+		log.Fatal("marshalling error: ", err)
+	}
+	log.Print("\nThis is a protobuf in binary format: \n")
+	log.Print(data)
 }

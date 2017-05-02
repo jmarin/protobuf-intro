@@ -12,7 +12,7 @@ First make sure that protoc is intalled. On a Mac, this can be done with `Homebr
 
 See it in action by running `python python/app.py`
 
-2. Generat Go code
+2. Generate Go code
 
 First install the `Go` protobuf compiler (assumes `Go` development environment, i.e. $GOPATH, etc. is already setup):
 
@@ -26,4 +26,12 @@ And generate classes from `proto` files:
 
 Compile project with `go build go/app.go` and run it with `go run go/app.go`
 
+3. Generate Java code
 
+`protoc -I=protobuf --java_out=java/protobuf/src/main/java protobuf/addressbook.proto`
+
+From the `java/protobuf` directory run:
+
+`mvn clean install`
+
+`mvn exec:java`

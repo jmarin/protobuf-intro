@@ -43,3 +43,7 @@ From the javascript subdirectory run:
 `npm install`
 
 `node index.js`
+
+5. Generate C++ code
+
+`protoc -I=protobuf --cpp_out=cpp protobuf/addressbook.proto`

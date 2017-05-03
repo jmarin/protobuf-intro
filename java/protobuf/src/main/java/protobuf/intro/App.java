@@ -52,7 +52,5 @@ public class App {
             System.out.println(ioe.getLocalizedMessage());
         }
 
-        //System.out.println(addressBook);
-
     }
 }

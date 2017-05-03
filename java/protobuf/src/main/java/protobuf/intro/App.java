@@ -2,6 +2,7 @@ package protobuf.intro;
 
 import java.util.ArrayList;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -41,13 +42,17 @@ public class App {
         try {
             FileOutputStream output = new FileOutputStream("target/addressbook.pbf");
             addressBook.writeTo(output);
+            FileInputStream input = new FileInputStream("target/addressbook.pbf");
+            Addressbook.AddressBook.Builder addressBook2 = Addressbook.AddressBook.newBuilder();
+            addressBook2.mergeFrom(input);
+            System.out.println(addressBook2);
         } catch (FileNotFoundException e){
             System.out.println(e.getLocalizedMessage());
         } catch (IOException ioe) {
             System.out.println(ioe.getLocalizedMessage());
         }
 
-        System.out.println(addressBook);
+        //System.out.println(addressBook);
 
     }
 }

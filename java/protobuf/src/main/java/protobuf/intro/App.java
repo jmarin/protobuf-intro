@@ -1,6 +1,9 @@
 package protobuf.intro;
 
 import java.util.ArrayList;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class App {
     public static void main( String[] args ) {
@@ -34,6 +37,15 @@ public class App {
                 .addPeople(john)
                 .addPeople(jane)
                 .build();
+
+        try {
+            FileOutputStream output = new FileOutputStream("target/addressbook.pbf");
+            addressBook.writeTo(output);
+        } catch (FileNotFoundException e){
+            System.out.println(e.getLocalizedMessage());
+        } catch (IOException ioe) {
+            System.out.println(ioe.getLocalizedMessage());
+        }
 
         System.out.println(addressBook);
 

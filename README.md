@@ -2,7 +2,7 @@
 
 ## A light introduction to Protocol Buffers
 
-First make sure that protoc is intalled. On a Mac, this can be done with `Homebrew`:
+First make sure that `protoc` is intalled. On a Mac, this can be done with `Homebrew`:
 
 `brew install protobuf`
 
